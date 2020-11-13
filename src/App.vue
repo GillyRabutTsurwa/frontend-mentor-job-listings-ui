@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+    <Banner
+      v-for="currentItem in items"
+      v-bind:key="currentItem.id"
+      v-bind:itemsProp="currentItem"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import jsonData from "./data.json";
+import Banner from "./components/Banner";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      items: jsonData
+    };
+  },
   components: {
-    HelloWorld
+    Banner: Banner
+  },
+  async created() {
+    console.log("App rendering...");
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss">
+@import "./App.css";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  width: 75%;
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 3rem auto;
 }
 </style>
